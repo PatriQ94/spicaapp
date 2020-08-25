@@ -1,1 +1,15 @@
-<p>settings works!</p>
+<div class="example-card" fxLayoutAlign="center center" fxFlexFill>
+    <mat-card fxFlex="30" class="mat-elevation-z12"> 
+        <mat-card-title>Access token</mat-card-title>       
+        <mat-card-content>
+            <form fxLayoutAlign="stretch" fxLayout="column">
+                <mat-form-field>
+                    <input id="accessToken" matInput placeholder="Insert new access token" value="{{accessToken}}" (change)="onLabelChange($event)">
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="primary" (click)="clearAccessToken()">Remove access token</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
