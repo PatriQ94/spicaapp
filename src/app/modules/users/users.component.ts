@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface PeriodicElement {
   name: string;
@@ -38,15 +39,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;  
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   constructor() { }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     console.log("Loaded user component")
   }
 
@@ -55,6 +58,13 @@ export class UsersComponent implements OnInit {
     
   }
 
-  refreshData(){}
+  refreshData(){
+    this.dataSource = new MatTableDataSource<PeriodicElement>( [
+      {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+      {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+      {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'}]);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+  }
 
 }
