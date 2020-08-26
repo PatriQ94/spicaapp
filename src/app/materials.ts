@@ -6,12 +6,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout'
 
 @NgModule ({
-  imports: [MatButtonModule,MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, FlexLayoutModule, MatTooltipModule],
-  exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, FlexLayoutModule, MatTooltipModule],
+  imports: [MatButtonModule,MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, 
+    MatFormFieldModule, FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule],
+  exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, 
+    FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule],
 })
 
 export class MaterialModules{}
