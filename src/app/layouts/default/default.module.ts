@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersComponent } from 'src/app/modules/users/users.component';
 import { PresenceComponent } from 'src/app/modules/presence/presence.component';
 import { SharedModule } from 'src/app/shared/shared.module'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from 'src/app/shared/shared.module'
     RouterModule,
     SharedModule,
     MaterialModules,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ]
 })
 export class DefaultModule { }
