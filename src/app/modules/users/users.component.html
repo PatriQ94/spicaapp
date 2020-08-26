@@ -1,1 +1,49 @@
-<p>users works!</p>
+<div class="example-card" fxLayoutAlign="center center" fxFlexFill>
+    <mat-card class="mat-elevation-z12"> 
+        <mat-card-title>Users</mat-card-title>       
+        <mat-card-content>
+            <form fxLayoutAlign="stretch" fxLayout="column">
+              <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="Id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="FirstName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FirstName </th>
+                  <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="LastName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> LastName </th>
+                  <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+                </ng-container>           
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="Address">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+                  <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button class="addButton" color="primary" (click)="addNewUser()">
+                <mat-icon inline=true>person_add</mat-icon>
+                Add new user</button>
+            <span class="example-spacer"></span>
+            <button mat-flat-button class="refreshButton" color="primary" (click)="refreshData()">
+                <mat-icon inline=true>refresh</mat-icon>
+                Refresh
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

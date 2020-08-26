@@ -3,8 +3,9 @@
         <mat-card-title>Access token</mat-card-title>       
         <mat-card-content>
             <form fxLayoutAlign="stretch" fxLayout="column">
-                <mat-form-field>
+                <mat-form-field [floatLabel]="'never'">
                     <input id="accessToken" matInput placeholder="Insert new access token" value="{{accessToken}}" (change)="onLabelChange($event)">
+                    <mat-icon matSuffix matTooltip="{{helpText}}">help_outline</mat-icon>
                 </mat-form-field>
             </form>
         </mat-card-content>

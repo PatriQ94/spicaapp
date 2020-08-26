@@ -9,6 +9,7 @@ export class SettingsComponent implements OnInit {
 
   constructor() { }
   accessToken = localStorage.getItem("access_token");
+  helpText = "Access token will be automatically updated change"
 
   ngOnInit(): void {
   }
