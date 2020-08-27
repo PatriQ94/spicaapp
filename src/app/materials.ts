@@ -9,14 +9,18 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatDialogModule} from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule ({
   imports: [MatButtonModule,MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, 
-    MatFormFieldModule, FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule],
+    MatFormFieldModule, FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule,
+    MatDialogModule, MatSelectModule, MatRadioModule],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, 
-    FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule],
+    FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatSelectModule, MatRadioModule],
 })
 
 export class MaterialModules{}
