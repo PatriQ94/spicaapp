@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>New user</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput [(ngModel)]="data.newUserFirstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Second name</mat-label>
+    <input matInput [(ngModel)]="data.newUserLastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="data.newUserEmail">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input matInput [(ngModel)]="data.newUserAddress">
+  </mat-form-field>
+  <label id="example-radio-group-label">Contract:</label>
+  <mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="data.newUserContract">
+  <mat-radio-button class="example-radio-button" *ngFor="let c of contract" [value]="c">
+    {{c}}
+  </mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <select matNativeControl [(ngModel)]="data.newUserGender">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Continent</mat-label>
+    <select matNativeControl [(ngModel)]="data.newUserContinent">
+      <option value="Africa">Africa</option>
+      <option value="Central America">Central America</option>
+      <option value="Europe">Europe</option>
+      <option value="North America">North America</option>
+      <option value="South America">South America</option>
+    </select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+    <button mat-flat-button color="primary" class="buttonCancel" (click)="closeDialog()">Cancel</button>
+</div>
