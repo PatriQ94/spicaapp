@@ -14,13 +14,15 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule ({
   imports: [MatButtonModule,MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, 
     MatFormFieldModule, FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule,
-    MatDialogModule, MatSelectModule, MatRadioModule],
+    MatDialogModule, MatSelectModule, MatRadioModule, MatSnackBarModule],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, 
-    FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatSelectModule, MatRadioModule],
+    FlexLayoutModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatSelectModule, 
+    MatRadioModule, MatSnackBarModule],
 })
 
 export class MaterialModules{}

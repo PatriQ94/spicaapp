@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { UserdialogComponent } from '../userdialog/userdialog.component';
+import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 export interface Users  {
   Id?:number;
@@ -16,12 +17,6 @@ export interface Users  {
   Unit2?:string;
   Unit3?:string;
 }
-
-const headers = new HttpHeaders({
-  'Accept': '*/*',
-  'Content-Type': 'application/json',
-  'Authorization': localStorage.getItem("access_token")
-});
 
 @Component({
   selector: 'app-users',
@@ -41,7 +36,7 @@ export class UsersComponent implements OnInit {
   newUserFirstName:string;
   newUserLastName:string;
 
-  constructor(private _httpClient: HttpClient, public dialog: MatDialog) { }
+  constructor(private _httpClient: HttpClient, public dialog: MatDialog, public _snackBar: SnackBarComponent) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -109,12 +104,19 @@ export class UsersComponent implements OnInit {
 
   //Post new user to Spica API
   addNewUser(toInsert){
+    var headers = new HttpHeaders({
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem("access_token")
+    });
+
     this._httpClient.put("http://rdweb.spica.com:5213/timeapi/employee",
     toInsert,
     {headers})
     .subscribe(
         val => {
             //Refresh grid upon a successful insert
+            this._snackBar.snackBarSuccess("Successfully saved a new user");
             this.refreshData();
         },
         response => {
@@ -129,8 +131,16 @@ export class UsersComponent implements OnInit {
 
   //Get users from Spica API
   getUsers(){
+    var headers = new HttpHeaders({
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem("access_token")
+    });
+
     var response = this._httpClient.get("http://rdweb.spica.com:5213/timeapi/employee", {headers : headers});
-    response.subscribe(r => this.dataSource.data = r as Users[])
+    response.subscribe(
+      success =>  {this.dataSource.data = success as Users[]},
+      error => { this._snackBar.snackBarError("An error occured while fetching users")})
   }
 
   //Filtering on the table
@@ -138,4 +148,5 @@ export class UsersComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
 }
