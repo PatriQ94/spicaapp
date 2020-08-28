@@ -46,8 +46,10 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-   //Adds a new user to the database and refreshes the grid
+  //Adds a new user to the database and refreshes the grid
   submitNewUser() {
+
+    //Dialog configuration
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -60,7 +62,7 @@ export class UsersComponent implements OnInit {
     //Open dialog window
     const dialogRef = this.dialog.open(UserdialogComponent,dialogConfig);
 
-    //Subscripte to dialog onClose event
+    //Subscribe to dialog onClose event
     dialogRef.afterClosed().subscribe(result => {
 
       if(result.newUserFirstName == null || result.newUserLastName == null)
@@ -97,40 +99,45 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  //Refresh table data
-  refreshData(){
-    this.getUsers();
-  }
-
-  //Post new user to Spica API
+  //Posts a new user to Spica API
   addNewUser(toInsert){
+
+    //Verify that the access token is set
+    if(this.accessTokenIsNull()){
+      return;
+    }
+
+    //Request headers
     var headers = new HttpHeaders({
       'Accept': '*/*',
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem("access_token")
     });
 
-    this._httpClient.put("http://rdweb.spica.com:5213/timeapi/employee",
-    toInsert,
-    {headers})
+    this._httpClient.put("http://rdweb.spica.com:5213/timeapi/employee",toInsert,{headers})
     .subscribe(
-        val => {
+        success => {
             //Refresh grid upon a successful insert
             this._snackBar.snackBarSuccess("Successfully saved a new user");
-            this.refreshData();
+            this.getUsers();
         },
-        response => {
-            //Error occured
-        },
-        () => {
-            //Observable completed
+        error => {
+            //Error occurred
+            this._snackBar.snackBarError("An error occurred while saving a new user")
         }
     );
   
   }
 
-  //Get users from Spica API
+  //Gets users from Spica API
   getUsers(){
+
+    //Verify that the access token is set
+    if(this.accessTokenIsNull()){
+      return;
+    }
+
+    //Request headers
     var headers = new HttpHeaders({
       'Accept': '*/*',
       'Content-Type': 'application/json',
@@ -139,8 +146,13 @@ export class UsersComponent implements OnInit {
 
     var response = this._httpClient.get("http://rdweb.spica.com:5213/timeapi/employee", {headers : headers});
     response.subscribe(
-      success =>  {this.dataSource.data = success as Users[]},
-      error => { this._snackBar.snackBarError("An error occured while fetching users")})
+      success =>  {
+        //Upon a successful response, override the table datasource
+        this.dataSource.data = success as Users[]
+      },
+      error => {
+        this._snackBar.snackBarError("An error occurred while fetching users")
+      })
   }
 
   //Filtering on the table
@@ -149,4 +161,12 @@ export class UsersComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  //Verifies if the access token is set
+  accessTokenIsNull():boolean{
+    if(localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == ""){
+      this._snackBar.snackBarError("Access token is missing. Please first set the access token.")
+      return true;
+    }
+    return false;
+  }
 }

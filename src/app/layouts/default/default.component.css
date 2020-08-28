@@ -4,6 +4,34 @@
   height: 100%;
 }
 
+.html, body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+} 
+
+/* .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+} */
+.mainContent{
+  min-height: 88vh;
+}
+
+.footer{
+  margin-top: 10px;
+  height: 50px;
+  text-align: center;
+  margin-left: -8px;
+  margin-bottom: -8px;
+  width: 100vw;
+  border-top: 1px solid #E0E0E0;
+}
+
 ::ng-deep .success{
   background: #4CAF50;
   color: white;
@@ -17,3 +45,4 @@
 ::ng-deep .mat-simple-snackbar-action {
   color: white !important;
 }
+

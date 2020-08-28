@@ -1,0 +1,32 @@
+.example-card {
+  margin-top: 20px;
+}
+
+  
+.mat-card {
+  width: 80vw;
+  min-width: 400px;
+}
+
+
+.refreshButton{
+    float: right;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .reloadCheckbox {
+    margin: 0 12px;
+  }
+
+  ::ng-deep .mat-tooltip {
+    font-size: 14px;
+  }

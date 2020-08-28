@@ -12,6 +12,8 @@ export class SnackBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  //Successful notification (toast/snackbar) with green color
   snackBarSuccess(message: string) {
     this._snackBar.open(message, "Close", {
       duration: 3000,
@@ -21,6 +23,7 @@ export class SnackBarComponent implements OnInit {
     });
   }
 
+  //Error notification (toast/snackbar) with red color
   snackBarError(message: string) {
     this._snackBar.open(message, "Close", {
       duration: 3000,

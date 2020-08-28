@@ -8,9 +8,11 @@ import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(public _snackBar: SnackBarComponent) { }
+  //Variables
   accessToken = localStorage.getItem("access_token");
   helpText = "Access token will be automatically updated change"
+
+  constructor(public _snackBar: SnackBarComponent) { }
 
   ngOnInit(): void {
   }
