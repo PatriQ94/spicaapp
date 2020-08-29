@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersComponent } from 'src/app/modules/users/users.component';
 import { UserdialogComponent } from 'src/app/modules/userdialog/userdialog.component';
 import { PresenceComponent } from 'src/app/modules/presence/presence.component';
+import { SnackBarComponent } from 'src/app/modules/snack-bar/snack-bar.component';
 import { SharedModule } from 'src/app/shared/shared.module'
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule
-  ]
+  ],
+  providers: [SnackBarComponent],
 })
 export class DefaultModule { }

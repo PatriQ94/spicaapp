@@ -4,7 +4,7 @@
         <mat-card-content>
           <mat-form-field>
             <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Europe" #input>
           </mat-form-field>          
 
             <form fxLayoutAlign="stretch" fxLayout="column">
@@ -74,7 +74,7 @@
                 <mat-icon inline=true>person_add</mat-icon>
                 Add new user</button>
             <span class="example-spacer"></span>
-            <button mat-flat-button class="refreshButton" color="primary" (click)="refreshData()">
+            <button mat-flat-button class="refreshButton" color="primary" (click)="getUsers()">
                 <mat-icon inline=true>refresh</mat-icon>
                 Refresh
             </button>

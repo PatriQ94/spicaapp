@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { UserdialogComponent } from '../userdialog/userdialog.component';
+import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 export interface Users  {
   Id?:number;
@@ -16,12 +17,6 @@ export interface Users  {
   Unit2?:string;
   Unit3?:string;
 }
-
-const headers = new HttpHeaders({
-  'Accept': '*/*',
-  'Content-Type': 'application/json',
-  'Authorization': localStorage.getItem("access_token")
-});
 
 @Component({
   selector: 'app-users',
@@ -41,7 +36,7 @@ export class UsersComponent implements OnInit {
   newUserFirstName:string;
   newUserLastName:string;
 
-  constructor(private _httpClient: HttpClient, public dialog: MatDialog) { }
+  constructor(private _httpClient: HttpClient, public dialog: MatDialog, public _snackBar: SnackBarComponent) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -51,8 +46,10 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-   //Adds a new user to the database and refreshes the grid
+  //Adds a new user to the database and refreshes the grid
   submitNewUser() {
+
+    //Dialog configuration
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -65,7 +62,7 @@ export class UsersComponent implements OnInit {
     //Open dialog window
     const dialogRef = this.dialog.open(UserdialogComponent,dialogConfig);
 
-    //Subscripte to dialog onClose event
+    //Subscribe to dialog onClose event
     dialogRef.afterClosed().subscribe(result => {
 
       if(result.newUserFirstName == null || result.newUserLastName == null)
@@ -102,40 +99,74 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  //Refresh table data
-  refreshData(){
-    this.getUsers();
-  }
-
-  //Post new user to Spica API
+  //Posts a new user to Spica API
   addNewUser(toInsert){
-    this._httpClient.put("http://rdweb.spica.com:5213/timeapi/employee",
-    toInsert,
-    {headers})
+
+    //Verify that the access token is set
+    if(this.accessTokenIsNull()){
+      return;
+    }
+
+    //Request headers
+    var headers = new HttpHeaders({
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem("access_token")
+    });
+
+    this._httpClient.put("http://rdweb.spica.com:5213/timeapi/employee",toInsert,{headers})
     .subscribe(
-        val => {
+        success => {
             //Refresh grid upon a successful insert
-            this.refreshData();
+            this._snackBar.snackBarSuccess("Successfully saved a new user");
+            this.getUsers();
         },
-        response => {
-            //Error occured
-        },
-        () => {
-            //Observable completed
+        error => {
+            //Error occurred
+            this._snackBar.snackBarError("An error occurred while saving a new user")
         }
     );
   
   }
 
-  //Get users from Spica API
+  //Gets users from Spica API
   getUsers(){
+
+    //Verify that the access token is set
+    if(this.accessTokenIsNull()){
+      return;
+    }
+
+    //Request headers
+    var headers = new HttpHeaders({
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem("access_token")
+    });
+
     var response = this._httpClient.get("http://rdweb.spica.com:5213/timeapi/employee", {headers : headers});
-    response.subscribe(r => this.dataSource.data = r as Users[])
+    response.subscribe(
+      success =>  {
+        //Upon a successful response, override the table datasource
+        this.dataSource.data = success as Users[]
+      },
+      error => {
+        this._snackBar.snackBarError("An error occurred while fetching users")
+      })
   }
 
   //Filtering on the table
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  //Verifies if the access token is set
+  accessTokenIsNull():boolean{
+    if(localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == ""){
+      this._snackBar.snackBarError("Access token is missing. Please first set the access token.")
+      return true;
+    }
+    return false;
   }
 }

@@ -1,1 +1,71 @@
-<p>presence works!</p>
+<div class="example-card" fxLayoutAlign="center center" fxFlexFill>
+    <mat-card class="mat-elevation-z12"> 
+        <mat-card-title>User presence</mat-card-title>       
+        <mat-card-content>
+            <form fxLayoutAlign="stretch" fxLayout="column">
+              <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                </ng-container>
+              
+                <!-- First name Column -->
+                <ng-container matColumnDef="FirstName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FirstName </th>
+                  <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+                </ng-container>
+
+                <!-- Last name Column -->
+                <ng-container matColumnDef="LastName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> LastName </th>
+                  <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+                </ng-container>           
+              
+                <!-- Last name Column -->
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+                </ng-container>  
+
+                <!-- Address Column -->
+                <ng-container matColumnDef="Address">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
+                </ng-container>
+              
+                <!-- Unit 1 Column -->
+                <ng-container matColumnDef="Unit1">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Unit1}} </td>
+                </ng-container>
+
+                <!-- Unit 2 Column -->
+                <ng-container matColumnDef="Unit2">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Contract </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Unit2}} </td>
+                </ng-container>
+
+                <!-- Unit 3 Column -->
+                <ng-container matColumnDef="Unit3">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Continent </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Unit3}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                
+              </table>
+                  <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-checkbox class="reloadCheckbox" [(ngModel)]="reload" matTooltip="{{helpText}}">Reload</mat-checkbox> 
+            <button mat-flat-button class="refreshButton" color="primary" (click)="getUsers()">
+                <mat-icon inline=true>refresh</mat-icon>
+                Refresh
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
