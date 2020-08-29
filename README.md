@@ -22,27 +22,27 @@ This app is a result of a task given by [Špica](https://www.spica.si/) but it c
 You will need the following tools:
 
 - [Node.js](https://nodejs.org/en/) (version 10 or later) with npm (version 6.4.1 or later)
-- [Angular CLI](https://github.com/angular/angular-cli) (version 10.0.7 or later)
+- [Angular CLI](https://github.com/angular/angular-cli)
 - [Visual Studio Code](https://code.visualstudio.com/) (optional)
 
 ## Build and run
 
 1. Create a folder on local computer to clone the repo, something like `C:\source` will be fine.
 
-2. Open cmd within newly created folder and clone the [SpicaApp repository from Github](https://github.com/PatriQ94/spicaapp)
+2. Open cmd within newly created folder and clone the [SpicaApp repository from Github](https://github.com/PatriQ94/spicaapp).
 
    ```console
    git clone https://github.com/PatriQ94/spicaapp.git
    ```
 
-3. Move to the root directory and install npm packages
+3. Move to the root directory and install npm packages.
 
    ```console
    cd spicaapp
    npm install
    ```
 
-4. Run the application
+4. Run the application.
 
    - For development and testing purposes:
 
@@ -66,7 +66,7 @@ You will need the following tools:
 
    This command will open up Google Chrome with disabled web security. This is a workaround to bypass CORS protection required by Time API.
 
-6. Launch [http://localhost:4200](http://localhost:4200) within the Chrome opened in the previous point
+6. Launch [http://localhost:4200](http://localhost:4200) within the Chrome opened in the previous point.
 
 ## How to test
 
@@ -74,7 +74,7 @@ Once the application is up and running we are presented with the default - ``set
 
 ![Settings](docs/settings.png)
 
-Here we need to set a new access token in order to utilize other pages. The token gets automatically saved to the local storage upon changing the input field. We can also remove it from local storage by simply pressing the Remove button.
+Here we need to set a new access token in order to utilize other pages. The token gets automatically saved to the local storage upon changing the input field. We can also the token from local storage by simply pressing the Remove button.
 
 One the token is set we can visit the other two pages, one of which is the ``users`` page. 
 
