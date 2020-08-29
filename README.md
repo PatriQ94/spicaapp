@@ -62,6 +62,8 @@ You will need the following tools:
    ```console
    chrome.exe --user-data-dir="D:/Chrome dev session" --disable-web-security
    ```
+    ![run](docs/run.png)
+
    This command will open up Google Chrome with disabled web security. This is a workaround to bypass CORS protection required by Time API.
 
 6. Launch [http://localhost:4200](http://localhost:4200) within the Chrome opened in the previous point
